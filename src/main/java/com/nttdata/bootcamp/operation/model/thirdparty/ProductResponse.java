@@ -1,16 +1,15 @@
-package com.nttdata.bootcamp.operation.model.dto.request;
+package com.nttdata.bootcamp.operation.model.thirdparty;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.UUID;
 
 /**
- * <b>Class</b>: {@link OperationRequest}<br/>
+ * <b>Class</b>: {@link ProductResponse}<br/>
  * @author NTTDATA <br/>
  * <u>Developed by</u>: <br/>
  * <ul>
@@ -18,25 +17,23 @@ import java.util.UUID;
  * </ul>
  * <u>Changes</u>:<br/>
  * <ul>
- * <li>10/01/2022 (acronym) Creation class.</li>
+ * <li>06/01/2022 (acronym) Creation class.</li>
  * </ul>
  * @version 1.0
  */
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Document(collection = "operation")
 @Builder
-public class OperationRequest {
-
-    @Id
+public class ProductResponse {
     private String id = UUID.randomUUID().toString();
-    private String cardNnumber;
+    private ProductType productType;
+    private AccountType accountType;
+    private CreditType creditType;
     private String accountNumber;
+    private TypeDocument typeDocument;
     private String numberDocument;
+    private String cardNumber;
     private String password;
-    private String typeOperation;
-    private String additionalAmount;
-
+    private String amount;
 }

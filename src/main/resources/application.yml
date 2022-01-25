@@ -1,3 +1,9 @@
 
 server:
   port: 9012
+
+application:
+  endpoints:
+    url:
+      mc_customer: http://localhost:9010/customer
+      mc_product: http://localhost:9011/product
