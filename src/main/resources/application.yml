@@ -1,0 +1,17 @@
+
+server:
+  port: 9072
+
+spring:
+  application:
+    name: service-operation
+  data:
+    mongodb:
+      uri: mongodb://boot1:3hda6HbmOTcwEZ7qYMvLr4uXKoOcCoTTjAKt8Onoj9O5gyHE9xAob5v1vKudhXfj5LKobrwCcmUT2JQIYY5BKg==@boot1.mongo.cosmos.azure.com:10255/?ssl=true&retrywrites=false&replicaSet=globaldb&maxIdleTimeMS=120000&appName=@boot1@
+      database: DBexample
+
+application:
+  endpoints:
+    url:
+      mc_customer: http://localhost:9010/customer/filter
+      mc_product: http://localhost:9011/product/filter

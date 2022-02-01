@@ -1,0 +1,188 @@
+{
+	"info": {
+		"_postman_id": "4d0fbd95-2733-4bae-9767-5bf9042f2324",
+		"name": "MC_OPERACION_BOOTCAMP",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "OPEN ACCOUNT",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"typeOperation\": \"0\",\r\n    \"numberDocument\": \"74593040\",\r\n    \"accountNumber\": \"987654321\",\r\n    \"cardNumber\": \"1289346750\",\r\n    \"password\": \"1234\",\r\n    \"amount\": \"100\"\r\n \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9072/operation/open-account",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9072",
+					"path": [
+						"operation",
+						"open-account"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET ALL",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9072/operation",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9072",
+					"path": [
+						"operation"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET BY ID",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9072/operation/61f822ce775fdf7f65c28272",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9072",
+					"path": [
+						"operation",
+						"61f822ce775fdf7f65c28272"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT BY ID",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "  {\r\n        \"id\": \"61f82f5c2b8fb82fb895b3fb\",\r\n        \"numberDocument\": \"71723706\",\r\n        \"accountNumber\": \"123456789\",\r\n        \"cardNumber\": \"789456123\",\r\n        \"amount\": \"100\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9072/operation/61f82f5c2b8fb82fb895b3fb",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9072",
+					"path": [
+						"operation",
+						"61f82f5c2b8fb82fb895b3fb"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE BY ID",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9072/operation/61f825584ee34c75fac525a9",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9072",
+					"path": [
+						"operation",
+						"61f825584ee34c75fac525a9"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "OPEN ACCOUNT Copy",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"numberDocument\": \"71723705\",\r\n    \"accountNumber\": \"123456789\",\r\n    \"cardNumber\": \"789456123\",\r\n    \"password\": \"1234\",\r\n    \"amount\": \"100\"\r\n \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9072/operation/open-account",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9072",
+					"path": [
+						"operation",
+						"open-account"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
