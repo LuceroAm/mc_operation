@@ -1,5 +1,6 @@
 package com.nttdata.bootcamp.operation.model.dto.request;
 
+import com.nttdata.bootcamp.operation.model.TypeOperation;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -30,6 +31,7 @@ import java.util.Date;
 public class OperationCreateAccountRequest {
 
     private String id;
+    private TypeOperation typeOperation;
     private String numberDocument;
     private String accountNumber;
     private String cardNumber;

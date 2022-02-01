@@ -34,6 +34,7 @@ public class Operation {
 
     @Id
     private String id = UUID.randomUUID().toString();
+    private TypeOperation typeOperation;
     private String numberDocument;
     private String accountNumber;
     private String cardNumber;

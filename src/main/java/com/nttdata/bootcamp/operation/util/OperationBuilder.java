@@ -11,6 +11,7 @@ public class OperationBuilder {
     public static OperationOpenAccountResponse createAccountResponseBuilder3(Operation model,CustomerResponse customerResponse , ProductResponse productResponse){
         return OperationOpenAccountResponse.builder()
                 .id(model.getId())
+                .typeOperation(model.getTypeOperation())
                 .numberDocument(model.getNumberDocument())
                 .customer(customerResponse)
                 .accountNumber(model.getAccountNumber())
@@ -23,6 +24,7 @@ public class OperationBuilder {
 
     public static Operation createAccountBuilder(OperationCreateAccountRequest operationRequest) {
         return Operation.builder()
+                .typeOperation(operationRequest.getTypeOperation())
                 .cardNumber(operationRequest.getCardNumber())
                 .accountNumber(operationRequest.getAccountNumber())
                 .numberDocument(operationRequest.getNumberDocument())
