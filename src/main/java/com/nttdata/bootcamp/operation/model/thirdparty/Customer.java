@@ -1,17 +1,18 @@
-package com.nttdata.bootcamp.operation.model;
-
+package com.nttdata.bootcamp.operation.model.thirdparty;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.UUID;
 
+
 /**
- * <b>Class</b>: {@link Operation}<br/>
+ * <b>Class</b>: {@link Customer}<br/>
  * @author NTTDATA <br/>
  * <u>Developed by</u>: <br/>
  * <ul>
@@ -19,7 +20,7 @@ import java.util.UUID;
  * </ul>
  * <u>Changes</u>:<br/>
  * <ul>
- * <li>10/01/2022 (acronym) Creation class.</li>
+ * <li>07/01/2022 (acronym) Creation class.</li>
  * </ul>
  * @version 1.0
  */
@@ -28,19 +29,19 @@ import java.util.UUID;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Document(collection = "operation")
+@Document(collection = "customer")
 @Builder
-public class Operation {
-
+@Slf4j
+public class Customer {
     @Id
     private String id = UUID.randomUUID().toString();
+    private TypeCustomer typeCustomer;
+    private EntityName entityName;
+    private String entityNameDescription;
+    private TypeDocument typeDocument;
     private String numberDocument;
-    private String accountNumber;
-    private String cardNumber;
-    private String password;
-    private String additionalAmount;
-    private String amount;
-    private String totalAmount;
-    private String date;
-
+    private String telephone;
+    private String address;
+    private String email;
 }
+

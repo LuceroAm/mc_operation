@@ -1,17 +1,20 @@
-package com.nttdata.bootcamp.operation.model;
+package com.nttdata.bootcamp.operation.model.dto.response;
 
-
+import com.nttdata.bootcamp.operation.model.thirdparty.Customer;
+import com.nttdata.bootcamp.operation.model.thirdparty.CustomerResponse;
+import com.nttdata.bootcamp.operation.model.thirdparty.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import reactor.core.publisher.Mono;
 
 import java.util.UUID;
 
+
 /**
- * <b>Class</b>: {@link Operation}<br/>
+ * <b>Class</b>: {@link OperationOpenAccountResponse}<br/>
  * @author NTTDATA <br/>
  * <u>Developed by</u>: <br/>
  * <ul>
@@ -24,23 +27,23 @@ import java.util.UUID;
  * @version 1.0
  */
 
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Document(collection = "operation")
 @Builder
-public class Operation {
+public class OperationOpenAccountResponse {
 
-    @Id
+      @Id
     private String id = UUID.randomUUID().toString();
     private String numberDocument;
+//    private Mono<CustomerResponse> customer;
+//    private Mono<Customer> customer;
+//    private CustomerResponse customer;
+    private Customer customer;
+//    private Mono<User> customer;
     private String accountNumber;
     private String cardNumber;
-    private String password;
-    private String additionalAmount;
     private String amount;
-    private String totalAmount;
     private String date;
 
 }

@@ -1,6 +1,6 @@
-package com.nttdata.bootcamp.operation.model;
+package com.nttdata.bootcamp.operation.model.dto.request;
 
-
+import com.nttdata.bootcamp.operation.model.thirdparty.customer.CustomerRequest;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -8,10 +8,12 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.UUID;
 
 /**
- * <b>Class</b>: {@link Operation}<br/>
+ * <b>Class</b>: {@link OperationCreateAccountRequest}<br/>
  * @author NTTDATA <br/>
  * <u>Developed by</u>: <br/>
  * <ul>
@@ -24,23 +26,24 @@ import java.util.UUID;
  * @version 1.0
  */
 
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Document(collection = "operation")
 @Builder
-public class Operation {
+public class OperationCreateAccountRequest {
 
-    @Id
-    private String id = UUID.randomUUID().toString();
     private String numberDocument;
     private String accountNumber;
     private String cardNumber;
     private String password;
-    private String additionalAmount;
     private String amount;
-    private String totalAmount;
-    private String date;
+
+    public String getDate(){
+        Date fecha = new Date();
+        String Fecha = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss").format(fecha);
+        String fe = Fecha.toString();
+        return fe;
+    }
 
 }

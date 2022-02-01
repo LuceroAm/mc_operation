@@ -32,7 +32,7 @@ public class OperationRequest {
 
     @Id
     private String id = UUID.randomUUID().toString();
-    private String cardNnumber;
+    private String cardNumber;
     private String accountNumber;
     private String numberDocument;
     private String password;

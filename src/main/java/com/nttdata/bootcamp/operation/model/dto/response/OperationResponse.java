@@ -1,5 +1,6 @@
 package com.nttdata.bootcamp.operation.model.dto.response;
 
+import com.nttdata.bootcamp.operation.model.thirdparty.CustomerResponse;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -31,6 +32,8 @@ public class OperationResponse {
 
       @Id
     private String id = UUID.randomUUID().toString();
+    private String numberDocument;
+    private CustomerResponse customer;
     private String accountNumber;
     private String typeOperation;
     private String additionalAmount;

@@ -2,8 +2,22 @@
 server:
   port: 9012
 
+spring:
+  application:
+    name: service-operation
+  data:
+    mongodb:
+      uri: mongodb://boot1:3hda6HbmOTcwEZ7qYMvLr4uXKoOcCoTTjAKt8Onoj9O5gyHE9xAob5v1vKudhXfj5LKobrwCcmUT2JQIYY5BKg==@boot1.mongo.cosmos.azure.com:10255/?ssl=true&retrywrites=false&replicaSet=globaldb&maxIdleTimeMS=120000&appName=@boot1@
+      database: DBexample
+
 application:
   endpoints:
     url:
-      mc_customer: http://localhost:9010/customer
+      #valid_address: http://run.mocky.io/v3/d1d95b0c-349d-461b-8c6f-56b9c499c43e
+      valid_address: https://jsonplaceholder.typicode.com/users
+#application:
+#  endpoints:
+#    url:
+      mc_customer: http://localhost:9010/customer/filter
+#      mc_customer: http://localhost:9010/customer
       mc_product: http://localhost:9011/product

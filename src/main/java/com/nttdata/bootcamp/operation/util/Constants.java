@@ -4,6 +4,9 @@ public class Constants {
 
     public final static String MAIN_PATH = "/operation";
     public final static String ID = "/{id}";
+    public final static String OPEN_ACCOUNT = "/open-account";
+    public final static String PRUEBA = "/prueba/{documentNumber}";
+    public final static String PRUEBA1 = "/prueba1/{documentNumber}";
 
     public final static String SAVE_VALUE="Metodo a traves del cual se envia la informacion de la operacion que  sera registrada dentro de la base de datos.";
     public final static String SAVE_NOTE="Para el registro de la operacion , sera necesario el llenado de todo los campos , a excepcion de los Id´s los cuales seran generados automaticamente.";
