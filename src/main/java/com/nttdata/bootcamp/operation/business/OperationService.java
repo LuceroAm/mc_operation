@@ -1,11 +1,7 @@
 package com.nttdata.bootcamp.operation.business;
 
 import com.nttdata.bootcamp.operation.model.dto.request.OperationCreateAccountRequest;
-import com.nttdata.bootcamp.operation.model.dto.request.OperationRequest;
 import com.nttdata.bootcamp.operation.model.dto.response.OperationOpenAccountResponse;
-import com.nttdata.bootcamp.operation.model.dto.response.OperationResponse;
-import com.nttdata.bootcamp.operation.model.thirdparty.Customer;
-import com.nttdata.bootcamp.operation.model.thirdparty.PruebaResponse;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -25,14 +21,11 @@ import reactor.core.publisher.Mono;
 
 
 public interface OperationService {
-    Mono<OperationResponse> create(OperationRequest operationRequest);
-    Mono<OperationResponse> findById(String id);
-    Flux<OperationResponse> findAll();
-    Mono<OperationResponse> update(OperationRequest operationRequest);
-    Mono<OperationResponse> remove(String id);
 
-    Mono<OperationOpenAccountResponse> openAccount(OperationCreateAccountRequest operationRequest);
-    Mono<PruebaResponse> prueba(String documentNumber);
-    Mono<OperationOpenAccountResponse> pruebaOperationOpenAccountResponse(OperationCreateAccountRequest operationRequest);
-    Mono<Customer> prueba1(String documentNumber);
+    Mono<OperationOpenAccountResponse> operationOpenAccountResponse(OperationCreateAccountRequest operationRequest);
+    Mono<OperationOpenAccountResponse> findById(String id);
+    Flux<OperationOpenAccountResponse> findAll();
+    Mono<OperationOpenAccountResponse> update(OperationCreateAccountRequest operationRequest);
+    Mono<OperationOpenAccountResponse> remove(String id);
+
 }

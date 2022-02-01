@@ -3,12 +3,9 @@ package com.nttdata.bootcamp.operation.business.impl;
 import com.nttdata.bootcamp.operation.business.OperationService;
 import com.nttdata.bootcamp.operation.model.Operation;
 import com.nttdata.bootcamp.operation.model.dto.request.OperationCreateAccountRequest;
-import com.nttdata.bootcamp.operation.model.dto.request.OperationRequest;
 import com.nttdata.bootcamp.operation.model.dto.response.OperationOpenAccountResponse;
-import com.nttdata.bootcamp.operation.model.dto.response.OperationResponse;
-import com.nttdata.bootcamp.operation.model.thirdparty.Customer;
 import com.nttdata.bootcamp.operation.model.thirdparty.CustomerResponse;
-import com.nttdata.bootcamp.operation.model.thirdparty.PruebaResponse;
+import com.nttdata.bootcamp.operation.model.thirdparty.ProductResponse;
 import com.nttdata.bootcamp.operation.repository.OperationRepository;
 import com.nttdata.bootcamp.operation.util.OperationBuilder;
 import lombok.extern.slf4j.Slf4j;
@@ -18,7 +15,6 @@ import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import java.net.URI;
 
 /**
  * <b>Class</b>: {@link OperationServiceImpl}<br/>
@@ -46,105 +42,49 @@ public class OperationServiceImpl implements OperationService {
     private WebClient webClientCustomer;
     @Autowired
     private WebClient webClientProduct;
-    @Autowired
-    private WebClient webClientUser;
 
     @Override
-    public Mono<OperationResponse> create(OperationRequest operationRequest) {
-        log.info("Guardar datos del Cliente");
+    public Mono<OperationOpenAccountResponse> operationOpenAccountResponse(OperationCreateAccountRequest operationRequest){
         return operationRepository.save(OperationBuilder
-                        .operationRequestToOperationEntity(operationRequest))
-                .map(operation -> OperationBuilder
-                        .operationEntityToOperationResponse(operation));
+                .createAccountBuilder(operationRequest))
+                .flatMap(this::getCustomer);
     }
 
     @Override
-    public Mono<OperationResponse> findById(String id) {
+    public Mono<OperationOpenAccountResponse> findById(String id) {
         return operationRepository.findById(id)
-                .map(operation -> OperationBuilder
-                        .operationEntityToOperationResponse(operation));
+                .flatMap(this::getCustomer);
     }
 
     @Override
-    public Flux<OperationResponse> findAll() {
+    public Flux<OperationOpenAccountResponse> findAll() {
         log.info("Obtener todos los registros de los Clientes");
         return operationRepository.findAll()
-                .map(operation -> OperationBuilder
-                        .operationEntityToOperationResponse(operation));
+                .flatMap(this::getCustomer);
     }
 
     @Override
-    public Mono<OperationResponse> update(OperationRequest operationRequest) {
+    public Mono<OperationOpenAccountResponse> update(OperationCreateAccountRequest operationRequest) {
         log.info("Actualizar un registro de un Cliente");
         return operationRepository.findById(operationRequest.getId())
                 .flatMap(operationBD->{
-                    return  create(operationRequest);
+                    return  operationOpenAccountResponse(operationRequest);
                 })
                 .switchIfEmpty(Mono.empty());
     }
 
     @Override
-    public Mono<OperationResponse> remove(String id) {
+    public Mono<OperationOpenAccountResponse> remove(String id) {
         log.info("Eliminar un registro de un Cliente");
         return  operationRepository
                 .findById(id)
-                .map(operation -> OperationBuilder
-                        .operationEntityToOperationResponse(operation))
+                .flatMap(this::getCustomer)
                 .flatMap(operationResponse -> operationRepository.deleteById(operationResponse.getId())
                         .thenReturn(operationResponse));
     }
 
-    @Override
-    public Mono<OperationOpenAccountResponse> pruebaOperationOpenAccountResponse(OperationCreateAccountRequest operationRequest){
 
-        return operationRepository.save(OperationBuilder
-                .createAccountBuilder(operationRequest))
-                .flatMap(this::consumoDefinitivo);
-    }
-
-
-    @Override
-    public Mono<OperationOpenAccountResponse> openAccount(OperationCreateAccountRequest operationRequest){
-        return operationRepository.save(OperationBuilder
-                .createAccountBuilder(operationRequest))
-                .map(operation -> OperationBuilder
-                            .createAccountResponseBuilder(operation));
-
-    }
-
-    @Override
-    public Mono<PruebaResponse> prueba(String documentNumber) {
-        return webClientCustomer.get()
-                .uri(uriBuilder ->
-                        uriBuilder
-                            .queryParam("numberDocument", documentNumber)
-                            .build())
-                .retrieve()
-                .bodyToMono(Customer.class)
-                .map( customer -> {
-                    PruebaResponse prueba1 = new PruebaResponse();
-                    prueba1.setNumberDocument(documentNumber);
-                    prueba1.setCustomer(customer);
-                    return prueba1;
-                });
-
-    }
-
-    @Override
-    public Mono<Customer> prueba1(String documentNumber) {
-        Mono<Customer> customer ;
-        customer =  webClientCustomer.get()
-                .uri(uriBuilder ->
-                        uriBuilder
-                            .queryParam("numberDocument", documentNumber)
-                            .build())
-                .retrieve()
-                .bodyToMono(Customer.class);
-        log.info("Info   "+customer.toString());
-        return customer;
-    }
-
-    public Mono<OperationOpenAccountResponse> consumoDefinitivo(Operation model) {
+    public Mono<OperationOpenAccountResponse> getCustomer(Operation model) {
 
         return webClientCustomer.get()
                 .uri(uriBuilder ->
@@ -152,17 +92,23 @@ public class OperationServiceImpl implements OperationService {
                                 .queryParam("numberDocument", model.getNumberDocument())
                                 .build())
                 .retrieve()
-                .bodyToMono(Customer.class)
-//                .map( customer -> {
-//                    OperationOpenAccountResponse response = new OperationOpenAccountResponse();
-//                    response.setId(model.getId());
-//                    response.setAccountNumber(model.getAccountNumber());
-//                    response.setNumberDocument(model.getNumberDocument());
-//                    response.setCustomer(customer);
-//                    return response;
-//                });
-                .map( customer ->
-                        OperationBuilder.createAccountResponseBuilder2(model,customer));
+                .bodyToMono(CustomerResponse.class)
+                .flatMap( customerResponse ->
+                        getProduct(model,customerResponse));
+
+    }
+
+    public Mono<OperationOpenAccountResponse> getProduct(Operation model,CustomerResponse customerResponse) {
+
+        return webClientProduct.get()
+                .uri(uriBuilder ->
+                        uriBuilder
+                                .queryParam("accountNumber", model.getAccountNumber())
+                                .build())
+                .retrieve()
+                .bodyToMono(ProductResponse.class)
+                .map( productResponse ->
+                        OperationBuilder.createAccountResponseBuilder3(model,customerResponse,productResponse));
 
     }
 }

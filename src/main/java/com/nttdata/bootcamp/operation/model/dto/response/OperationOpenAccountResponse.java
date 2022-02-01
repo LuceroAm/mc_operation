@@ -1,14 +1,12 @@
 package com.nttdata.bootcamp.operation.model.dto.response;
 
-import com.nttdata.bootcamp.operation.model.thirdparty.Customer;
 import com.nttdata.bootcamp.operation.model.thirdparty.CustomerResponse;
-import com.nttdata.bootcamp.operation.model.thirdparty.User;
+import com.nttdata.bootcamp.operation.model.thirdparty.ProductResponse;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
-import reactor.core.publisher.Mono;
 
 import java.util.UUID;
 
@@ -36,12 +34,9 @@ public class OperationOpenAccountResponse {
       @Id
     private String id = UUID.randomUUID().toString();
     private String numberDocument;
-//    private Mono<CustomerResponse> customer;
-//    private Mono<Customer> customer;
-//    private CustomerResponse customer;
-    private Customer customer;
-//    private Mono<User> customer;
+    private CustomerResponse customer;
     private String accountNumber;
+    private ProductResponse associatedProduct;
     private String cardNumber;
     private String amount;
     private String date;

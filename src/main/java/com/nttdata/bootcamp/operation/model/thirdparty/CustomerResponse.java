@@ -31,6 +31,7 @@ public class CustomerResponse {
     private String id = UUID.randomUUID().toString();
     private TypeCustomer typeCustomer;
     private EntityName entityName;
+    private String entityNameDescription;
     private TypeDocument typeDocument;
     private String numberDocument;
     private String telephone;

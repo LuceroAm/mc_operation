@@ -1,16 +1,12 @@
 package com.nttdata.bootcamp.operation.model.dto.request;
 
-import com.nttdata.bootcamp.operation.model.thirdparty.customer.CustomerRequest;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.UUID;
 
 /**
  * <b>Class</b>: {@link OperationCreateAccountRequest}<br/>
@@ -33,6 +29,7 @@ import java.util.UUID;
 @Builder
 public class OperationCreateAccountRequest {
 
+    private String id;
     private String numberDocument;
     private String accountNumber;
     private String cardNumber;
