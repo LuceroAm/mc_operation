@@ -46,10 +46,11 @@ public class OperationBuilder {
                 .build();
     }
 
-    public static OperationOpenAccountResponse createAccountResponseBuilder2(Operation model,OperationOpenAccountResponse response){
-        return response.builder()
+    public static OperationOpenAccountResponse createAccountResponseBuilder2(Operation model,Customer customerResponse){
+        return OperationOpenAccountResponse.builder()
                 .id(model.getId())
                 .numberDocument(model.getNumberDocument())
+                .customer(customerResponse)
                 .accountNumber(model.getAccountNumber())
                 .cardNumber(model.getCardNumber())
                 .amount(model.getAmount())
@@ -57,17 +58,17 @@ public class OperationBuilder {
                 .build();
     }
 
-    public static OperationOpenAccountResponse createAccountResponseBuilder2(Operation model,CustomerResponse customerResponse){
-        return OperationOpenAccountResponse.builder()
-                .id(model.getId())
-//                .customer(customerResponse)
-                .numberDocument(model.getNumberDocument())
-                .accountNumber(model.getAccountNumber())
-                .cardNumber(model.getCardNumber())
-                .amount(model.getAmount())
-                .date(model.getDate())
-                .build();
-    }
+//    public static OperationOpenAccountResponse createAccountResponseBuilder2(Operation model,CustomerResponse customerResponse){
+//        return OperationOpenAccountResponse.builder()
+//                .id(model.getId())
+////                .customer(customerResponse)
+//                .numberDocument(model.getNumberDocument())
+//                .accountNumber(model.getAccountNumber())
+//                .cardNumber(model.getCardNumber())
+//                .amount(model.getAmount())
+//                .date(model.getDate())
+//                .build();
+//    }
 
     public static Operation createAccountBuilder(OperationCreateAccountRequest operationRequest) {
         return Operation.builder()
