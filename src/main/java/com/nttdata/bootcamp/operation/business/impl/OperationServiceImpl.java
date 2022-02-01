@@ -1,6 +1,7 @@
 package com.nttdata.bootcamp.operation.business.impl;
 
 import com.nttdata.bootcamp.operation.business.OperationService;
+import com.nttdata.bootcamp.operation.exception.ResourceNotFoundException;
 import com.nttdata.bootcamp.operation.model.Operation;
 import com.nttdata.bootcamp.operation.model.dto.request.OperationCreateAccountRequest;
 import com.nttdata.bootcamp.operation.model.dto.response.OperationOpenAccountResponse;
@@ -45,9 +46,13 @@ public class OperationServiceImpl implements OperationService {
 
     @Override
     public Mono<OperationOpenAccountResponse> operationOpenAccountResponse(OperationCreateAccountRequest operationRequest){
-        return operationRepository.save(OperationBuilder
-                .createAccountBuilder(operationRequest))
-                .flatMap(this::getCustomer);
+        if("OPEN_ACCOUNT".equals(operationRequest.getTypeOperation().name())){
+            return operationRepository.save(OperationBuilder
+                    .createAccountBuilder(operationRequest))
+                    .flatMap(this::getCustomer);
+        }
+        return Mono.error( new ResourceNotFoundException(
+                "Parametro de tipo de Operacion incorrecto para crear una cuenta ingresar 0"));
     }
 
     @Override
